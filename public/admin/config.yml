@@ -2,7 +2,7 @@ backend:
   # ローカルでテストする場合はtest-repoに書き換える
   # see: https://decapcms.org/docs/nextjs/
   name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)
+  branch: main
 media_folder: public/img
 public_folder: img
 collections:
