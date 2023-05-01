@@ -1,6 +1,5 @@
-import fs from "fs";
 import { POSTS_DIR } from "src/lib/constants";
-import { getPost } from "src/lib/api";
+import { getAllPosts, getPost, listFiles, splitPath } from "src/lib/api";
 import ReactMarkdown from "react-markdown";
 import type Post from "src/types/post";
 
@@ -21,12 +20,23 @@ export default function Detail({ post }: Props) {
 }
 
 export async function getStaticPaths() {
-  const fileNames = fs.readdirSync(POSTS_DIR);
-  const paths = fileNames.map((fileName) => ({
-    params: {
-      slug: fileName.replace(/\.md$/, ""),
-    },
-  }));
+  const allPosts = getAllPosts([
+    "slug",
+    "year",
+    "month",
+    "title",
+    "date",
+    "content",
+  ]);
+  const paths = allPosts.map((post) => {
+    return {
+      params: {
+        year: post.year,
+        month: post.month,
+        slug: post.slug,
+      },
+    };
+  });
 
   return {
     paths,
@@ -35,7 +45,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
-  const post = getPost(`${params.slug}.md`, [
+  const path = `${POSTS_DIR}/${params.year}/${params.month}/${params.slug}/index.md`;
+  const post = getPost(path, [
+    "year",
+    "month",
     "slug",
     "title",
     "date",

@@ -14,7 +14,9 @@ export default function Index({ allPosts }: Props) {
       <ul>
         {allPosts.map((post) => (
           <div key={post.slug}>
-            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+            <Link href={`/posts/${post.year}/${post.month}/${post.slug}`}>
+              {post.title}
+            </Link>
           </div>
         ))}
       </ul>
@@ -23,7 +25,14 @@ export default function Index({ allPosts }: Props) {
 }
 
 export async function getStaticProps() {
-  const allPosts = getAllPosts(["slug", "title", "date", "content"]);
+  const allPosts = getAllPosts([
+    "slug",
+    "year",
+    "month",
+    "title",
+    "date",
+    "content",
+  ]);
   return {
     props: {
       allPosts,

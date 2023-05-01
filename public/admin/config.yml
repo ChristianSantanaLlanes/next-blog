@@ -15,7 +15,9 @@ collections:
     folder: "src/posts"
     create: true
     slug: "{{fields.slug}}"
-    path: "{{year}}/{{month}}/{{slug}}"
+    path: "{{year}}/{{month}}/{{slug}}/index"
+    # 記事と同じフォルダで画像管理する
+    # ref: https://decapcms.org/docs/beta-features/#folder-collections-media-and-public-folder
     media_folder: ""
     public_folder: ""
     fields:
@@ -24,7 +26,7 @@ collections:
       - {
           label: "Publish Date",
           name: "date",
-          widget: "datetime",
+          widget: "date",
           format: "YYYY-MM-DD",
         }
       - { label: "Body", name: "body", widget: "markdown" }
