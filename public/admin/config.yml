@@ -1,24 +1,30 @@
+site_url: https://dynamic-puppy-9c60ac.netlify.app/
+locale: "ja"
 backend:
   # ローカルでテストする場合はtest-repoに書き換える
   # see: https://decapcms.org/docs/nextjs/
   name: git-gateway
   branch: main
-media_folder: public/img
-public_folder: img
+
+media_folder: static/images/upload
+public_folder: /images/upload
+
 collections:
-  - name: "pages"
-    label: "Pages"
-    files:
-    - label: "Home"
-      name: "home"
-      file: "content/home.md"
-      fields:
-        - { label: "Title", name: "title", widget: "string"}
-        - { label: "Publish Date", name: "date", widget: "datetime" }
-        - { label: "Body", name: "body", widget: "markdown"}
-        - label: 'Cats'
-          name: "cats"
-          widget: list
-          fields:
-            - { label: "Name", name: "name", widget: "string"}
-            - { label: "Description", name: "description", widget: "text"}
+  - name: "blog"
+    label: "Blog"
+    folder: "src/posts"
+    create: true
+    slug: "{{fields.slug}}"
+    path: "{{year}}/{{month}}/{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - {
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+        }
+      - { label: "Body", name: "body", widget: "markdown" }
