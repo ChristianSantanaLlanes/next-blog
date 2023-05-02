@@ -1,23 +1,37 @@
 import { POSTS_DIR } from "src/lib/constants";
-import { getAllPosts, getPost, listFiles, splitPath } from "src/lib/api";
+import { getAllPosts, getPost } from "src/lib/api";
 import ReactMarkdown from "react-markdown";
-import Image from "next/image";
+import PostImage from "src/components/PostImage";
 import type Post from "src/types/post";
 
 type Props = {
   post: Post;
 };
 
-export default function Detail({ post }: Props) {
-  const image = require("src/posts/2023/05/postdir_in_image_path/neko_image-1024x856.jpg");
+export default function PostDetail({ post }: Props) {
+  const markdownComponents = {
+    img: (image) => {
+      return (
+        <PostImage
+          src={
+            require(`src/posts/${post.year}/${post.month}/${post.slug}/${image.src}`)
+              .default.src
+          }
+          alt={image.alt}
+        />
+      );
+    },
+  };
+
   return (
     <>
       <div>詳細画面</div>
       <p>{post.slug}</p>
       <p>{post.date}</p>
       <p>{post.title}</p>
-      <ReactMarkdown>{post.content}</ReactMarkdown>
-      <Image src={image} alt="test" title="test" />
+      <ReactMarkdown components={markdownComponents}>
+        {post.content}
+      </ReactMarkdown>
     </>
   );
 }
