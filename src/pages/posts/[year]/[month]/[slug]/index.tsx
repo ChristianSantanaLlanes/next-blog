@@ -1,6 +1,7 @@
 import { POSTS_DIR } from "src/lib/constants";
 import { getAllPosts, getPost, listFiles, splitPath } from "src/lib/api";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 import type Post from "src/types/post";
 
 type Props = {
@@ -8,6 +9,8 @@ type Props = {
 };
 
 export default function Detail({ post }: Props) {
+  const image =
+    require("src/posts/2023/05/postdir_in_image_path/neko_image-1024x856.jpg").default;
   return (
     <>
       <div>詳細画面</div>
@@ -15,6 +18,7 @@ export default function Detail({ post }: Props) {
       <p>{post.date}</p>
       <p>{post.title}</p>
       <ReactMarkdown>{post.content}</ReactMarkdown>
+      <Image src={image} alt="test" title="test" />
     </>
   );
 }
