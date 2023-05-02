@@ -9,8 +9,7 @@ type Props = {
 };
 
 export default function Detail({ post }: Props) {
-  const image =
-    require("src/posts/2023/05/postdir_in_image_path/neko_image-1024x856.jpg").default;
+  const image = require("src/posts/2023/05/postdir_in_image_path/neko_image-1024x856.jpg");
   return (
     <>
       <div>詳細画面</div>
