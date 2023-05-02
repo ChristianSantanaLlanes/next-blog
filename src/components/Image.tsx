@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 type Props = {
@@ -16,6 +17,6 @@ export default function PostImage({
   width = 100,
 }: Props) {
   return (
-    <img src={src} alt={alt} title={title} height={height} width={width} />
+    <Image src={src} alt={alt} title={title} height={height} width={width} />
   );
 }
