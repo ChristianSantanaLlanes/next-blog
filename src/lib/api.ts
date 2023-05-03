@@ -12,7 +12,9 @@ export function getAllPosts(fields: string[]) {
 }
 
 export function getPost(fileName: string, fields: string[]) {
-  const path = fileName.replace(/^src\/posts\//, "").replace(/\.md$/, "");
+  const path = fileName
+    .replace(/^src\/contents\/posts\//, "")
+    .replace(/\.md$/, "");
   const { year, month, slug } = splitPath(path);
   const fileContent = fs.readFileSync(fileName, "utf8");
   const { data, content } = matter(fileContent);

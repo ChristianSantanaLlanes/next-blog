@@ -14,7 +14,7 @@ export default function PostDetail({ post }: Props) {
       return (
         <PostImage
           src={
-            require(`src/posts/${post.year}/${post.month}/${post.slug}/${image.src}`)
+            require(`src/contents/posts/${post.year}/${post.month}/${post.slug}/${image.src}`)
               .default.src
           }
           alt={image.alt}

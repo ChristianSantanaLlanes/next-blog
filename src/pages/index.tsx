@@ -14,7 +14,9 @@ export default function Index({ allPosts }: Props) {
       <ul>
         {allPosts.map((post) => (
           <div key={post.slug}>
-            <Link href={`/posts/${post.year}/${post.month}/${post.slug}`}>
+            <Link
+              href={`contents/posts/${post.year}/${post.month}/${post.slug}`}
+            >
               {post.title}
             </Link>
           </div>
