@@ -1,56 +1,38 @@
 import fs from "fs";
 import matter from "gray-matter";
 import { POSTS_DIR } from "src/lib/constants";
+import type { Post, PostDir } from "src/types/post";
 
-export function getAllPosts(fields: string[]) {
-  const fileNames = listFiles(POSTS_DIR);
-  const posts = fileNames
-    .filter((fileName) => fileName.match(/.+\.md$/))
-    .map((fileName) => getPost(fileName, fields))
+// postの配列を返す
+export function getAllPosts(): Post[] {
+  const postFilePaths = listFiles(POSTS_DIR);
+  const posts = postFilePaths
+    .filter((filePath) => filePath.match(/.+\.md$/))
+    .map((filePath) => getPost(factoryPostDir(filePath)))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
 }
 
-export function getPost(fileName: string, fields: string[]) {
-  const path = fileName
-    .replace(/^src\/contents\/posts\//, "")
-    .replace(/\.md$/, "");
-  const { year, month, slug } = splitPath(path);
-  const fileContent = fs.readFileSync(fileName, "utf8");
+// postを返す
+export function getPost(postDir: PostDir): Post {
+  const filePath = postFilePath(postDir);
+  const fileContent = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(fileContent);
+  const title = data["title"];
+  const date = JSON.parse(JSON.stringify(data["date"]));
+  const { year, month, slug } = postDir;
 
-  type Items = {
-    [key: string]: string;
+  return {
+    title,
+    date,
+    content,
+    year,
+    month,
+    slug,
   };
-
-  const items: Items = {};
-
-  fields.forEach((field) => {
-    if (field === "year") {
-      return (items[field] = year);
-    }
-    if (field === "month") {
-      return (items[field] = month);
-    }
-    if (field === "slug") {
-      return (items[field] = slug);
-    }
-    if (field === "date") {
-      return (items[field] = JSON.parse(JSON.stringify(data[field])));
-    }
-    if (field === "content") {
-      return (items[field] = content);
-    }
-
-    if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
-    }
-  });
-
-  return items;
 }
 
-export function listFiles(dir: string): string[] {
+function listFiles(dir: string): string[] {
   return fs
     .readdirSync(dir, { withFileTypes: true })
     .flatMap((dirent) =>
@@ -60,14 +42,15 @@ export function listFiles(dir: string): string[] {
     );
 }
 
-type path = {
-  year: string;
-  month: string;
-  slug: string;
-};
+function postFilePath({ year, month, slug }: PostDir): string {
+  return `${POSTS_DIR}/${year}/${month}/${slug}/index.md`;
+}
 
-export function splitPath(path: string): path {
-  const splitPath = path.split("/");
+function factoryPostDir(postFilePath: string): PostDir {
+  const filePath = postFilePath
+    .replace(/^src\/contents\/posts\//, "")
+    .replace(/\.md$/, "");
+  const splitPath = filePath.split("/");
   const [year, month, slug] = splitPath;
   return {
     year,

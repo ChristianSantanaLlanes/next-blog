@@ -1,3 +1,5 @@
+"use client";
+
 import { BLOG_NAME } from "src/lib/constants";
 
 export default function Footer() {

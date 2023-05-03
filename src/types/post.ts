@@ -1,10 +1,13 @@
-type Post = {
-  slug: string;
-  year: string;
-  month: string;
+export type PostFrontMatter = {
   title: string;
   date: string;
   content: string;
 };
 
-export default Post;
+export type PostDir = {
+  year: string;
+  month: string;
+  slug: string;
+};
+
+export type Post = PostFrontMatter & PostDir;
