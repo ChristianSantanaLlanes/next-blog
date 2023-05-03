@@ -3,56 +3,142 @@ slug: blamer_vim
 title: git blameができる拡張機能が欲しかったのでblamer.nvimを入れてみた
 date: 2023-05-03
 ---
-ファイルごとにgit blameができる拡張機能を探していたところ、下記記事をドンピシャで見つけたので入れてみました。\
-[ポップアップウィンドウでgit blameを確認できる blamer.nvim - Qiita](https://qiita.com/Yoika/items/26553e8ad067b9e468e8)
-blamer.nvimという名前ですが、popup機能が使える最新のVimであれば使うことができます。  
 
-## git blameとは
+# 見出し 1
 
-> git blame の基本的な機能は、ファイルでコミットされた特定の行の作成者メタデータを表示することです。\
-> [git blame | Atlassian Git Tutorial](https://www.atlassian.com/ja/git/tutorials/inspecting-a-repository/git-blame)
+これは見出し 1 です。
 
-## インストール方法
+## 見出し 2
 
-[APZelos/blamer.nvim: A git blame plugin for neovim inspired by VS Code's GitLens plugin](https://github.com/APZelos/blamer.nvim#installation)
-プラグイン管理にはvim-plugを使っています。\
-vimrcに下記を追加して、`:PlugInstall`します。  
+これは見出し 2 です。
 
-```javascript
-Plug 'APZelos/blamer.nvim'
+### 見出し 3
+
+これは見出し 3 です。
+
+#### 見出し 4
+
+これは見出し 4 です。
+
+##### 見出し 5
+
+これは見出し 5 です。
+
+###### 見出し 6
+
+これは見出し 6 です。
+
+## 段落
+
+これは 1 つ目の段落の 1 行目です。  
+これは 1 つ目の段落の 2 行目です。
+
+これは 2 つ目の段落の 1 行目です。  
+これは 2 つ目の段落の 2 行目です。
+
+## 順序無しリスト
+
+これは順序無しリストです。
+
+- 1
+- 2
+  - 2-1
+  - 2-2
+    - 2-2-1
+    - 2-2-2
+- 3
+
+これは順序無しリストです。
+
+## 順序付きリスト
+
+これは順序付きリストです。
+
+1. 1
+1. 2
+   1. 2-1
+   1. 2-2
+      1. 2-2-1
+      1. 2-2-2
+1. 3
+
+これは順序付きリストです。
+
+## 引用
+
+これは引用です。
+
+> 引用
+> 引用
+
+これは引用です。
+
+## コードブロック
+
+これはコードブロックです。
+
+```ruby
+puts 1 + 1
 ```
 
-## 設定
+これはコードブロックです。
 
-私はvimrcに次の設定をしました。  
+## テーブル
 
-```javascript
-" By default blamer_delay is 1000 ms
-let g:blamer_delay = 500
+これはテーブルです。
 
-let g:blamer_date_format = '%y/%m/%d'
-```
+| Left align | Right align | Center align |
+| :--------- | ----------: | :----------: |
+| This       |        This |     This     |
+| column     |      column |    column    |
+| will       |        will |     will     |
+| be         |          be |      be      |
+| left       |       right |    center    |
+| aligned    |     aligned |   aligned    |
 
-また、`SPC`キーを起点としたキーマッピングで使えるようにvim-which-keyの設定も行っています。\
-`SPC` + `g` + `b`で`:BlamerToggle`を実行します。  
+これはテーブルです。
 
-```
-" g is for git
-let g:which_key_map.g = {
-      \ 'name' : '+git' ,
-      \ 'b' : [':BlamerToggle'      , 'git blame toggle'],
-      \ }
-```
+## リンク
 
-## デモ
+これは [リンク](http://example.com) です。
 
-`:BlamerToggle`をすると、ノーマルモードで今いる行のgitのメタデータが表示されるようになります。\
-また、`v`でビジュアルモードに切り替えて選択した複数行のgitのメタデータも表示されます。\
-非常にシンプルな機能になっています。  
+## コード
+
+これは `puts 1 + 1` コードです。
+
+## 強い強調
+
+これは **強い強調** です。
+
+## 強調
+
+これは _強調_ です。
+
+## 削除済みテキスト
+
+これは ~~削除済みテキスト~~ です。
+
+### 定義リスト
+
+これは定義リストです。
+
+<dl>
+  <dt>リンゴ</dt>
+  <dd>赤いフルーツ</dd>
+  <dt>オレンジ</dt>
+  <dd>橙色のフルーツ</dd>
+</dl>
+
+これは定義リストです。
+
+## 水平線
+
+これは水平線です。
+
+---
+
+これは水平線です。
+
+## 画像
 
 ![](qkuikv84nx.gif)
-
-## まとめ
-
-有名どころの[fugitive.vim](https://github.com/tpope/vim-fugitive)の機能の中に`:Git blame`という機能もありますが、\
-git blameの機能のみが欲しかったためドンピシャでgit blame専用のプラグインが見つかって良かったです。
