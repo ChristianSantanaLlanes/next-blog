@@ -10,7 +10,7 @@ type Props = {
 
 export default function PostDetail({ post }: Props) {
   const markdownComponents = {
-    img: (image) => {
+    img: (image: any) => {
       return (
         <PostImage
           src={
