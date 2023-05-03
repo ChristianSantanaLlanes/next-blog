@@ -1,6 +1,6 @@
 ---
 slug: blamer_vim
-title: git blameができる拡張機能が欲しかったのでblamer.nvimを入れてみた
+title: 1 git blameができる拡張機能が欲しかったのでblamer.nvimを入れてみた
 date: 2023-05-03
 ---
 

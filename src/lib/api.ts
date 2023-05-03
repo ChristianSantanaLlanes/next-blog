@@ -4,12 +4,19 @@ import { POSTS_DIR } from "src/lib/constants";
 import type { Post, PostDir } from "src/types/post";
 
 // postの配列を返す
-export function getAllPosts(): Post[] {
+export function getAllPosts(offset?: number, limit?: number): Post[] {
   const postFilePaths = listFiles(POSTS_DIR);
-  const posts = postFilePaths
+  let posts = postFilePaths
     .filter((filePath) => filePath.match(/.+\.md$/))
     .map((filePath) => getPost(factoryPostDir(filePath)))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+
+  if (posts.length == 0) return [];
+
+  if (offset !== undefined && limit !== undefined) {
+    posts = [...posts.slice(offset, offset + limit)];
+  }
+
   return posts;
 }
 

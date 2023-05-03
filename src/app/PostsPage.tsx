@@ -13,12 +13,7 @@ export default function PostsPage({ allPosts }: Props) {
   return (
     <>
       <Box px={4}>
-        <Container
-          as="main"
-          maxW="container.lg"
-          marginTop="4"
-          marginBottom="16"
-        >
+        <Container as="main" maxW="container.lg" marginTop="8" marginBottom="8">
           {allPosts.map((post) => (
             <Box key={post.slug}>
               <Link
