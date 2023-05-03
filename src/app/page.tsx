@@ -8,7 +8,7 @@ export default async function Page() {
   const limitPosts = getAllPosts(0, PER_PAGE);
   return (
     <>
-      <PostsPage allPosts={limitPosts} />;
+      <PostsPage allPosts={limitPosts} />
       <Pagination totalCount={allPosts.length} currentPageID={1} />
     </>
   );

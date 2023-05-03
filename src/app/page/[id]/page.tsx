@@ -7,9 +7,11 @@ export async function generateStaticParams() {
   const allPosts = getAllPosts();
   const range = (start: number, end: number) =>
     [...Array(end - start + 1)].map((_, i) => start + i);
-  const paths = range(1, Math.ceil(allPosts.length / PER_PAGE)).map(
-    (id) => `/page/${id}`
-  );
+  const paths = range(1, Math.ceil(allPosts.length / PER_PAGE)).map((id) => {
+    return {
+      id: String(id),
+    };
+  });
 
   return paths;
 }
@@ -21,7 +23,7 @@ export default async function Page({ params }: any) {
   const limitPosts = getAllPosts(offset, limit);
   return (
     <>
-      <PostsPage allPosts={limitPosts} />;
+      <PostsPage allPosts={limitPosts} />
       <Pagination
         totalCount={allPosts.length}
         currentPageID={Number(params.id)}
