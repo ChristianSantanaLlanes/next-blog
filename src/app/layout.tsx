@@ -1,22 +1,13 @@
 import type { Metadata } from "next";
 import { BLOG_NAME } from "src/lib/constants";
-import Header from "./Header";
-import Footer from "./Footer";
+import App from "./App";
 
 type Props = {
   children: React.ReactNode;
 };
 
 export default function RootLayout({ children }: Props) {
-  return (
-    <html lang="ja">
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
-  );
+  return <App>{children}</App>;
 }
 
 export const metadata: Metadata = {
